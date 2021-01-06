@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define faster         ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define pb push_back
+
+int main()
+{
+    ll tc,n,k,d;
+    cin>>tc;
+    while(tc--)
+    {
+        cin>>n>>k>>d;
+        ll ar[n];
+        for(int i=0; i<n; i++)
+        {
+            cin>>ar[i];
+        }
+        int ans=0;
+        for(int i=0; i<n; i++)
+        {
+            ll rem=ar[i]%k;
+            if(i!=n-1)
+            {
+                ar[i+1]=ar[i+1]+rem;
+            }
+            ans+=ar[i]/k;
+        }
+        if(ans>=d)cout<<d<<endl;
+        else cout<<ans<<endl;
+    }
+}
