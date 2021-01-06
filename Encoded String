@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define faster         ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define pb push_back
+
+
+typedef long long int ll;
+typedef unsigned long long int llu;
+
+int binary_to_dicimal(int n)
+{
+    int res=0,i=0;
+    while(n!=0)
+    {
+        int rem=n%10;
+        res+=rem*pow(2,i);
+        n/=10;
+        i++;
+    }
+    return res;
+}
+char is_check(int n)
+{
+    if(n==0)return 'a';
+    if(n==1)return 'b';
+    if(n==2)return 'c';
+    if(n==3)return 'd';
+    if(n==4)return 'e';
+    if(n==5)return 'f';
+    if(n==6)return 'g';
+    if(n==7)return 'h';
+    if(n==8)return 'i';
+    if(n==9)return 'j';
+    if(n==10)return 'k';
+    if(n==11)return 'l';
+    if(n==12)return 'm';
+    if(n==13)return 'n';
+    if(n==14)return 'o';
+    if(n==15)return 'p';
+}
+int main()
+{
+    ll tc,n;
+    cin>>tc;
+    while(tc--)
+    {
+        string s;
+        cin>>n;
+        cin>>s;
+        string ans;
+        for(int i=0; i<s.size(); i+=4)
+        {
+            int num=stoi(s.substr(i,4));
+            int s=binary_to_dicimal(num);
+            ans+=is_check(s);
+
+        }
+        cout<<ans<<endl;
+    }
+}
