@@ -1,0 +1,74 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define faster         ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define pb push_back
+
+/**----data type----*/
+typedef long long int ll;
+typedef unsigned long long int llu;
+
+int main()
+{
+    ll tc,n,m;
+    cin>>tc;
+alpha:
+    while(tc--)
+    {
+        cin>>n>>m;
+        ll an[n],am[m];
+        ll sumn=0,summ=0;
+        for(int i=0; i<n; i++)
+        {
+            cin>>an[i];
+            sumn+=an[i];
+        }
+        for(int i=0; i<m; i++)
+        {
+            cin>>am[i];
+            summ+=am[i];
+        }
+        sort(an,an+n,greater<ll>());
+        sort(am,am+m);
+
+        stack<ll>stn;
+        stack<ll>stm;
+        for(int i=0; i<n; i++)
+        {
+            stn.push(an[i]);
+        }
+        for(int i=0; i<m; i++)
+        {
+            stm.push(am[i]);
+        }
+
+        if(sumn>summ)
+        {
+            cout<<0<<endl;
+            goto alpha;
+        }
+        ll ans=0;
+        while(true)
+        {
+            if(!stn.empty() and !stm.empty())
+            {
+                if(stn.top()<stm.top())
+                {
+                    int a=stn.top();
+                    int b=stm.top();
+                    sumn=(sumn-a)+b;
+                    summ=(summ-b)+a;
+                    stn.pop(),stm.pop();
+                    ans++;
+                }
+                else
+                {
+                    stn.pop(),stm.pop();
+                }
+            }
+            else break;
+            if(sumn>summ)break;
+        }
+        if(sumn>summ)cout<<ans<<endl;
+        else cout<<-1<<endl;
+    }
+}
