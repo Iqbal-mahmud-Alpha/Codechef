@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define faster         ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define mem(a,b)       memset(a,b,sizeof(a))
+#define ff first
+#define ss second
+#define pr pair<ll,ll>
+#define pb push_back
+#define gcd(a,b)    __gcd(a,b)
+#define lcm(a,b)    (a*(b/gcd(a,b)))
+#define mod  1000000007
+#define num 1000008
+
+/**----data type----*/
+typedef long long int ll;
+typedef unsigned long long int llu;
+
+int main()
+{
+    ll tc,n,k,x,y;
+    cin>>tc;
+    while(tc--)
+    {
+        cin>>n>>k>>x>>y;
+        vector<pr>v;
+        if(x==y)
+        {
+            cout<<n<<" "<<n<<endl;
+        }
+        else  if(x>y)
+        {
+            v.pb(make_pair(n,y+n-x));
+            v.pb(make_pair(y+n-x,n));
+            v.pb(make_pair(0,x-y));
+            v.pb(make_pair(x-y,0));
+            cout<<v[(k-1)%4].ff<<" "<<v[(k-1)%4].ss<<endl;
+        }
+        else
+        {
+            v.pb(make_pair(x+n-y,n));
+            v.pb(make_pair(n,n-y+x));
+            v.pb(make_pair(y-x,0));
+            v.pb(make_pair(0,y-x));
+            cout<<v[(k-1)%4].ff<<" "<<v[(k-1)%4].ss<<endl;
+        }
+    }
+}
