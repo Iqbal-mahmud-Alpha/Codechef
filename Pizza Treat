@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define faster         ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define ff first
+#define ss second
+#define pb push_back
+#define gcd(a,b)   __gcd(a,b)
+#define lcm(a,b)    (a*(b/gcd(a,b)))
+#define all(a)     a.begin(),a.end()
+#define mod 1000000007
+#define num 1000000
+
+/**----data type----*/
+typedef long long int ll;
+typedef unsigned long long int llu;
+bool check(int a[],int n,int pizza,int time)
+{
+    int take_time=0;
+    int toatal_pizza=0;
+    for(int i=0; i<n; i++)
+    {
+        take_time=a[i];
+        int j=2;
+        while(take_time<=time)
+        {
+            toatal_pizza++;
+//            cout<<take_time<<' '<<toatal_pizza<<' '<<time<<endl;
+
+            take_time+=j*a[i];
+            j++;
+        }
+        if(toatal_pizza>=pizza)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+int main()
+{
+    int tc,n,p;
+    cin>>tc;
+    while(tc--)
+    {
+        cin>>p>>n;
+        int a[n];
+        for(int i=0; i<n; i++)
+        {
+            cin>>a[i];
+        }
+        sort(a,a+n);
+        ll cnt=a[0]*p*(p+1)/2;
+        while(true)
+        {
+            if(check(a,n,p,cnt))
+            {
+                cnt--;
+            }
+            else break;
+        }
+        cout<<cnt+1<<endl;
+    }
+}
+
+
