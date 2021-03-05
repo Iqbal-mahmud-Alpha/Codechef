@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define faster  ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define ff first
+#define ss second
+#define pb push_back
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * (b / gcd(a, b)))
+#define all(a) a.begin(), a.end()
+#define mod 1000000007
+#define num 1000000
+
+/**----data type----*/
+typedef long long int ll;
+typedef unsigned long long int llu;
+vector<ll>v;
+bool a[num];
+void sive()
+{
+    memset(a,true,sizeof(a));
+    a[0]=a[1]=false;
+    for(int i=4; i<num; i+=2)a[i]=false;
+    for(int i=3; i<sqrt(num); i+=2)
+    {
+        if(a[i])
+        {
+            for(int j=i*i; j<num; j+=i*2)
+            {
+                a[j]=false;
+            }
+        }
+    }
+    for(int i=0; i<num; i++)
+    {
+        if(a[i])v.push_back(i);
+    }
+}
+vector<ll>range;
+void segment_sive(ll b,ll c)
+{
+    ll len=c-b+1;
+    bool isprime[len];
+    for(int i=0; i<len; i++)isprime[i]=true;
+    if(b==1)isprime[0]=false;
+    for(int i=0; v[i]*v[i]<=c; i++)
+    {
+        ll currentprime=v[i];
+        ll base=(b/currentprime)*currentprime;
+        if(base<b)base+=currentprime;
+        for(ll j=base; j<=c; j+=currentprime)
+        {
+            isprime[j-b]=false;
+        }
+        if(base==currentprime)isprime[base-b]=true;
+    }
+    range.clear();
+    for(int i=0; i<len; i++)
+    {
+        if(isprime[i])range.pb(i+b);
+    }
+}
+int main()
+{
+    sive();
+    ll tc;
+    cin>>tc;
+    while(tc--)
+    {
+        ll k,l,r;
+        cin>>k>>l>>r;
+        segment_sive(l,r);
+        ll n=range[k-1]%10;
+        ll c=range[k-1];
+//        cout<<n<<endl;
+        for(ll i:range)
+        {
+            if(i%10==n and i<=c)cout<<i<<' ';
+        }
+        cout<<endl;
+    }
+}
