@@ -1,0 +1,111 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define faster      ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define ff first
+#define ss second
+#define pb push_back
+
+#define fr0(i, n)      for(int i=0; i<n; i++)
+#define fr1(i, n)      for(int i=1; i<=n; i++
+
+#define mem(a,b)  memset(a,b,sizeof(a))
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * (b / gcd(a, b)))
+#define all(a) a.begin(), a.end()
+#define setbit(n) __builtin_popcount(n);
+#define totalbit(n) log2(n)+1
+#define INF 1000000000
+#define mod 1000000007
+#define num 3200
+
+/**------- Char Chk----------*/
+bool isLower(char ch)
+{
+    if(ch>='a' && ch<='z') return true;
+    return false;
+}
+bool isUppper(char ch)
+{
+    if(ch>='A' && ch<='Z') return true;
+    return false;
+}
+bool isDiget(char ch)
+{
+    if(ch>='0' && ch<='9') return true;
+    return false;
+}
+
+/**----data type----*/
+typedef long long int ll;
+typedef unsigned long long int llu;
+
+vector<int>prime;
+bool a[num];
+void sive()
+{
+    memset(a,true,sizeof(a));
+    a[0]=a[1]=false;
+    for(int i=4; i<num; i+=2)a[i]=false;
+    for(int i=3; i<sqrt(num); i+=2)
+    {
+        if(a[i])
+        {
+            for(int j=i*i; j<num; j+=i*2)
+            {
+                a[j]=false;
+            }
+        }
+    }
+    for(int i=0; i<num; i++)
+    {
+        if(a[i])prime.push_back(i);
+    }
+}
+int findFactor(int n)
+{
+    if (n < 1) return 0;
+    int sqrn = (int) sqrt(n);
+    int divisor = 1;
+    for (int i = 0; prime[i]*prime[i] <= n; i++)
+    {
+        if (n % prime[i] == 0)
+        {
+            int cnt = 1;
+            while (n % prime[i] == 0)
+            {
+                n /= prime[i];
+                cnt++;
+            }
+            divisor *= cnt;
+        }
+    }
+    if (n > 1) divisor *= 2;
+    return divisor;
+}
+int main()
+{
+    sive();
+    int t,n,res;
+    vector<int>ans;
+    for(int i=1; i<=1e6; i++)
+    {
+        if(findFactor(i)%2==1)ans.pb(i);
+    }
+    cin>>t;
+st:
+    while(t--)
+    {
+        for(int i=0; i<ans.size(); i++)
+        {
+            cout<<ans[i]<<endl;
+            cin>>res;
+            if(res==0)continue;
+            else if(res==1)
+            {
+                goto st;
+            }
+            else if(res==-1 or i==1999)break;
+        }
+    }
+}
+
