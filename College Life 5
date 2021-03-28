@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define faster      ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define ff first
+#define ss second
+#define pb push_back
+#define mem(a,b)  memset(a,b,sizeof(a))
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * (b / gcd(a, b)))
+#define all(a) a.begin(), a.end()
+#define setbit(n) __builtin_popcount(n);
+#define totalbit(n) log2(n)+1
+#define precision(x)      cout<<fixed<<setprecision(x)
+#define INF 1000000000
+#define mod 1000000007
+#define num 100005
+
+/**----data type----*/
+typedef long long int ll;
+typedef unsigned long long int llu;
+
+int main()
+{
+    faster
+    int t,f,c,a;
+    cin>>t;
+    while(t--)
+    {
+        cin>>f>>c;
+        map<int,int>F,C,m;
+        for(int i=0; i<f; i++)
+        {
+
+            cin>>a;
+            F[a]=1;
+            m[a];
+        }
+        for(int i=0; i<c; i++)
+        {
+            cin>>a;
+            C[a]=1;
+            m[a];
+        }
+        int cnt=1,football=1,cricket=1;
+        vector<pair<int,int>>p;
+        int k=0;
+        for(auto i:m)
+        {
+            if(F[i.ff])
+            {
+                if(k==0)continue;
+                football=1;
+                cricket=0;
+            }
+            else if(C[i.ff])
+            {
+                cricket=1;
+                football=0;
+            }
+            p.pb(make_pair(football,cricket));
+            k++;
+        }
+        for(int i=0; i<p.size()-1; i++)
+        {
+            if(p[i].ff!=p[i+1].ff and p[i].ss!=p[i+1].ss)cnt++;
+        }
+        cout<<cnt<<endl;
+    }
+}
+
+
+
+
+
