@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define faster      ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define ff first
+#define ss second
+#define pb push_back
+#define mem(a,b)  memset(a,b,sizeof(a))
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * (b / gcd(a, b)))
+#define all(a) a.begin(), a.end()
+#define setbit(n) __builtin_popcount(n);
+#define totalbit(n) log2(n)+1
+#define precision(x)      cout<<fixed<<setprecision(x)
+#define INF 1000000000
+#define mod 1000000007
+#define num 100005
+
+/**----data type----*/
+typedef long long int ll;
+typedef unsigned long long int llu;
+
+int main()
+{
+    int r,o,c;
+    cin>>r>>o>>c;
+    int rem=(20-o)*6;
+    int res=rem*6+c;
+    if(res>r)
+    {
+        cout<<"YES"<<endl;
+    }
+    else cout<<"NO"<<endl;
+
+}
+
+
