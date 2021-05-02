@@ -1,0 +1,111 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define faster            ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define ff                first
+#define ss                second
+#define pb                push_back
+#define pr                pair<int,int>
+#define mem(a,b)          memset(a,b,sizeof(a))
+#define gcd(a, b)         __gcd(a, b)
+#define lcm(a, b)         (a * (b / gcd(a, b)))
+#define all(a)            a.begin(), a.end()
+#define setbit(n)         __builtin_popcount(n);
+#define totalbit(n)       log2(n)+1
+#define lens(s)           s.size()
+#define lena(a)           sizeof(a)/sizeof(a[0])
+#define posation(x)       cout<<fixed<<setprecision(x)
+#define pi                3.141592653589793
+#define INF               1000000000
+#define mod               1000000007 //10^9+7;
+#define num               1006
+
+/**----data type----*/
+typedef long long int ll;
+typedef unsigned long long int llu;
+
+/**---Graph_move---*/
+int dx[]= {-1, 0, 1,  0, -1, -1,  1, 1};
+int dy[]= { 0, 1, 0, -1, -1,  1, -1, 1};
+int kx[]= {-2,-1, 1, 2,  2,  1, -1, -2};
+int ky[]= { 1, 2, 2, 1, -1, -2, -2, -1};
+
+int vis[num][num];
+int ar[num][num],dis[num][num];
+int n=8,m=8;
+
+bool is_valid(int x,int y)
+{
+    if(x<1 or x>n or y<1 or y>m)
+    {
+        return false;
+    }
+    if(vis[x][y]==1)return false;
+    return true;
+}
+void bfs(int sorX,int sorY)
+{
+    queue<pr>q;
+    q.push({sorX,sorY});
+    vis[sorX][sorY]=1;
+    dis[sorX][sorY]=0;
+    while(!q.empty())
+    {
+        int curx=q.front().ff;
+        int cury=q.front().ss;
+        q.pop();
+        for(int i=0; i<8; i++)
+        {
+            if(is_valid(curx+kx[i],cury+ky[i]))
+            {
+                int newx=curx+kx[i];
+                int newy=cury+ky[i];
+                q.push({newx,newy});
+                vis[newx][newy]=1;
+                dis[newx][newy]=dis[curx][cury]+1;
+            }
+        }
+    }
+    cout<<"Dinstance array"<<endl;
+    for(int i=1; i<=n; i++)
+    {
+        for(int j=1; j<=n; j++)
+        {
+            cout<<dis[i][j]<<' ';
+        }
+        cout<<endl;
+    }
+}
+int check(char ch)
+{
+    if(ch=='a')return 1;
+    if(ch=='b')return 2;
+    if(ch=='c')return 3;
+    if(ch=='d')return 4;
+    if(ch=='e')return 5;
+    if(ch=='f')return 6;
+    if(ch=='g')return 7;
+    if(ch=='h')return 8;
+}
+int main()
+{
+    int tc,x,y,a,b;
+    char c1,c2;
+    cin>>tc;
+    while(tc--)
+    {
+        cin>>c1>>y>>c2>>b;
+        x=check(c1);
+        a=check(c2);
+        bfs(x,y);
+        cout<<dis[a][b]<<endl;
+        for(int i=1; i<=8; i++)
+        {
+            for(int j=1; j<=8; j++)
+            {
+                dis[i][j]=0;
+                vis[i][j]=0;
+            }
+        }
+    }
+}
+
